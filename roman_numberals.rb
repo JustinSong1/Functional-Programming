@@ -1,6 +1,13 @@
 #Justin Song, Period 6
 #This is the optional extension
 def arabic_to_roman(integer)
+	converions_helper("", integer)
+end
+
+def converions_helper(current_numerals, current_number)
+	if(current_number == 0) 
+		return current_numerals
+	end
 	roman_numeral = {   1 => "I", 
 						4 => "IV", 
 						5 => "V",
@@ -14,20 +21,14 @@ def arabic_to_roman(integer)
 						500 => "D", 
 						900 => "CM", 
 						1000 => "M"}
-	to_roman = ""
 	roman_numerals = Hash[roman_numeral.to_a.reverse]
-
-	roman_numerals.map do |number, letter|
-		if integer >= number
-			integer -= number
-			to_roman += letter
-			if integer >= 1000
-				integer -= 1000
-				to_roman += "M"
-			end
+	roman_numerals.each do |number, letter|
+		if current_number >= number
+			current_numerals += letter
+			current_number -= number
+			return converions_helper(current_numerals, current_number)
 		end
 	end
-	return to_roman
 end
 
-puts arabic_to_roman(2999)
+puts arabic_to_roman(978)
