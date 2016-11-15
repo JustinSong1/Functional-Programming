@@ -5,41 +5,23 @@
 # Determine whether a string contains a Social Security Number.
 def has_ssn?(string)
 	results = string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/
-	if(results != nil) 
-		return true
-	end
-	return false
+	results == nil ? false : true
 end
 
 # Find and return a Social Security Number.
 def grab_ssn(string)
-	index = string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/
-	if(index != nil)
-		return string[index..index+10]
-	end
-	return ""
+	return string.match(/\d\d\d-\d\d-\d\d\d\d/).to_s
 end
 
 
 # Find and return all Social Security Numbers.
-def grab_all_ssns(string)
-	array = []
-	until (string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/) == nil
-		index = string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/
-		array << string[index..index+10]
-		string[index..index+10] = ""
-	end
-	return array
+def grab_all_ssns(string)	
+	return string.scan(/\d\d\d-\d\d-\d\d\d\d/)
 end
 
 # Obfuscate all Social Security Numbers. Example: XXX-XX-4430.
 def hide_all_ssns(string)
-	until (string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/) == nil
-		index = string =~ /\d\d\d(-)\d\d(-)\d\d\d\d/
-		string[index..index+2] = 'XXX'
-		string[index+4..index+5] = 'XX'
-	end
-	return string
+	return string.gsub(/(\d{3})-(\d{2})-(\d{4})/, 'XXX-XX-\3')
 end
 
 

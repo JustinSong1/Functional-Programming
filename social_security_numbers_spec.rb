@@ -1,11 +1,11 @@
-require_relative('../social_security_numbers')
+require_relative('social_security_numbers.rb')
 
 describe 'has_ssn?' do
   it 'returns true if it finds an SSN' do
     expect(has_ssn?('The number is 234-60-1422')).to be true
   end
 
-  it 'returns false if it does not find an SSN' do
+  it 'returns false if itrub does not find an SSN' do
     expect(has_ssn?('The number is XXX-XX-1422')).to be false
   end
 end
