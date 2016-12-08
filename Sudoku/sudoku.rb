@@ -12,7 +12,7 @@ def solve(board_string)
 	change_can_be_made = true
 	while change_can_be_made
 		change_can_be_made = false
-		if board != (square_solve(board))
+		if board != (horizontal_eight(square_solve(board)))
 			change_can_be_made = true
 			board = horizontal_eight(vertical_eight(square_solve(board)))
 		end
@@ -67,27 +67,27 @@ def square_solve(board)
 			numbers_in_row = []
 			
 			#Error somewhere here
-			# x = 0
+			x = 0
 
-			# while x < 9
-			# 	numbers_in_column << board[column][x]
-			# 	x += 1
-			# end
+			while x < 9
+				numbers_in_column << board[column][x]
+				x += 1
+			end
 
-			# x = 0
+			x = 0
 
-			# while x < 9
-			# 	numbers_in_row << board[x][row]
-			# 	x += 1
-			# end
+			while x < 9
+				numbers_in_row << board[x][row]
+				x += 1
+			end
 
-			# numbers_in_row.each do |number|
-			# 	possible_numbers.delete(number)
-			# end
+			numbers_in_row.each do |number|
+				possible_numbers.delete(number)
+			end
 
-			# numbers_in_column do |number|
-			# 	possible_numbers.delete(number)
-			# end
+			numbers_in_column.each do |number|
+				possible_numbers.delete(number)
+			end
 
 			if possible_numbers.length == 1
 				board[starting_center[0]][starting_center[1]] = possible_numbers[0]
